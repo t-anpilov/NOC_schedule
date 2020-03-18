@@ -22,6 +22,9 @@ class UserDate {
         this.year = year
         this.shift = shift
     }
+    showDate(elem) {
+        elem.innerHTML = this.day + '.' + this.month + '.' + this.year + ' - ' + this.shift
+    }
 }
 
 function calculateDate(container, data1, data2) {
@@ -41,16 +44,11 @@ function calculateDate(container, data1, data2) {
     } else if (x) {    
         dayType = compare(x)        
     } 
-    showDate(container, day, dayType)       
-}
-
-function showDate(elem, data, text) {
-    let day = +data.getDate()
-    let d = addZero(day)
-    let month = +data.getMonth() + 1
-    let m = addZero(month)
-    let y = +data.getFullYear()
-    elem.innerHTML = d + '.' + m + '.' + y + ' - ' + text
+    let d = addZero(+day.getDate())
+    let m = addZero(+day.getMonth() + 1)
+    let year = +day.getFullYear()
+    let userDate = new UserDate(d, m, year, dayType)
+    userDate.showDate(outputWindow)       
 }
 
 function compare(num) { 
