@@ -1,0 +1,11 @@
+.data-in {
+    margin: 40px auto 0;
+    width: 40%;
+    border: 1px solid lightcoral;
+}
+.data-in div {
+    padding: 12px;
+}
+.data-in p {
+    padding-bottom: 6px;
+}

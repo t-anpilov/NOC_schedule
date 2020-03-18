@@ -1,16 +1,24 @@
 const outputWindow = document.getElementById('date_output')
 const firstDate = document.getElementById('first_date')
 const lastDate = document.getElementById('last_date')
+const closeBtn = document.getElementById('close')
 const btn = document.getElementById('do')
+
+
+closeBtn.addEventListener('click', closeInput)
 
 btn.addEventListener('click', ()=>{
     calculateDate(outputWindow, firstDate, lastDate)
 })
 
+function closeInput() {
+    firstDate.disabled = true  
+}
+
 function calculateDate(container, data1, data2) {
         
     let date = data1.valueAsDate
-    let day = data2.valueAsDate    
+    let day = data2.valueAsDate  
     let dayType = ''
     let x, y
     if (day>=date){

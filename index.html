@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
     <title>My schedule</title>
 </head>
 <body>
     <section class='data-in'>
         <div>
+            <p>Enter the date of the 1st-1st shift:</p>
             <input id='first_date' type="date">
+            <button id='close'>Enter</button>
         </div>        
         <div>
+            <p>Choose the desired date:</p>
             <input id='last_date' type="date">
-        </div>
-        <div>
-            <button id='do'>do</button>
-        </div>        
+            <button id='do'>Enter</button>
+        </div>                
     </section>    
     <section class='data-out'>
         <div id="date_output"> </div>
