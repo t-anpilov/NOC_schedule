@@ -15,6 +15,15 @@ function closeInput() {
     firstDate.disabled = true  
 }
 
+class UserDate {
+    constructor(day, month, year, shift){
+        this.day = day
+        this.month = month
+        this.year = year
+        this.shift = shift
+    }
+}
+
 function calculateDate(container, data1, data2) {
         
     let date = data1.valueAsDate
@@ -29,11 +38,10 @@ function calculateDate(container, data1, data2) {
     if (x>14) {
         y = x%15
         dayType = compare(y)
-        showDate(container, day, dayType)
     } else if (x) {    
-        dayType = compare(x)
-        showDate(container, day, dayType)
-    }        
+        dayType = compare(x)        
+    } 
+    showDate(container, day, dayType)       
 }
 
 function showDate(elem, data, text) {
