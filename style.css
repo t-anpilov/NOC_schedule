@@ -23,15 +23,17 @@ body {
 .data-out {
     margin: 10px 10px 0; 
     display: flex;
-    justify-content: center;    
+    justify-content: space-between;    
 }
 .data-out div {    
     padding: 12px;
-    width: 240px;
     background-color: floralwhite;
 }
 .data-out p {  
     text-align: center;  
     padding: 4px;
     font-size: 0.9em;    
+}
+.bold {
+    font-weight: bold;
 }

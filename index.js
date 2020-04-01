@@ -15,9 +15,10 @@ const options = {
 closeBtn.addEventListener('click', closeInput)
 
 btn.addEventListener('click', ()=>{
-    calculateDate(outputWindow, firstDate, lastDate)
-    createBefore(lastDate)
-    createAfter(lastDate)
+    cleanBox(outputWindow)
+    createBefore(lastDate, outputWindow)
+    calculateDate(outputWindow, firstDate, lastDate)    
+    createAfter(lastDate, outputWindow)
 })
 
 function closeInput() {
@@ -33,6 +34,13 @@ class UserDate {
         let shownDay = document.createElement('div') 
         shownDay.innerHTML = `<p>${this.date.toLocaleString("uk", options)}</p><p>${this.shift}</p>`
         elem.append(shownDay)
+    }
+}
+
+class centerUserDate extends UserDate {
+    showDate(elem) {
+        super.showDate(elem)
+        elem.lastChild.classList.add('bold')       
     }
 }
 
@@ -53,26 +61,25 @@ function calculateDate(container, data1, data2) {
     } else if (x) {    
         dayType = compare(x)        
     } 
-    let userDate = new UserDate(day, dayType)
-    userDate.showDate(container)
-
+    let userDate = new centerUserDate(day, dayType)
+    userDate.showDate(container)    
 }
 
-function createBefore (date) {
+function createBefore (date, container) {
     for (let i=3; i>0; i--) {
         let secs = +date.valueAsDate - i*86400*1000
         let day = new Date(secs)
         let otherDate = new UserDate(day, null)
-        console.log(otherDate)
+        otherDate.showDate(container)
     }
 }
 
-function createAfter (date) {
+function createAfter (date, container) {
     for (let i=1; i<=3; i++) {
         let secs = +date.valueAsDate + i*86400*1000
         let day = new Date(secs)
         let otherDate = new UserDate(day, null)
-        console.log(otherDate)
+        otherDate.showDate(container)
     }
 }
 
@@ -89,9 +96,15 @@ function compare(num) {
     } return result
 }
 
-function addZero(num) {
+/*function addZero(num) {
     if (num<10 && num>0){
         num = '0' + num
     }
     return num
+}*/
+
+function cleanBox(box) {
+    while(box.lastChild){
+        box.removeChild(box.lastChild)
+    }
 }
