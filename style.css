@@ -1,11 +1,37 @@
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(102, 112, 122);
+    font: bold 1.5em/1.0 Arial;
+    padding-top: 27px;
+}
+body {
+    font-family: Arial;
+    color: rgb(52, 58, 65);
+}
 .data-in {
-    margin: 40px auto 0;
+    margin: 20px auto 0;
     width: 40%;
-    border: 1px solid lightcoral;
+    background-color: rgb(233, 228, 224);
 }
 .data-in div {
     padding: 12px;
 }
 .data-in p {
     padding-bottom: 6px;
+}
+.data-out {
+    margin: 10px 10px 0; 
+    display: flex;
+    justify-content: center;    
+}
+.data-out div {    
+    padding: 12px;
+    width: 240px;
+    background-color: floralwhite;
+}
+.data-out p {  
+    text-align: center;  
+    padding: 4px;
+    font-size: 0.9em;    
 }

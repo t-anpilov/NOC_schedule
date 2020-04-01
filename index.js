@@ -1,14 +1,23 @@
-const outputWindow = document.getElementById('date_output')
+const outputWindow = document.getElementById('date_out')
 const firstDate = document.getElementById('first_date')
 const lastDate = document.getElementById('last_date')
 const closeBtn = document.getElementById('close')
 const btn = document.getElementById('do')
+
+const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+}
 
 
 closeBtn.addEventListener('click', closeInput)
 
 btn.addEventListener('click', ()=>{
     calculateDate(outputWindow, firstDate, lastDate)
+    createBefore(lastDate)
+    createAfter(lastDate)
 })
 
 function closeInput() {
@@ -16,19 +25,19 @@ function closeInput() {
 }
 
 class UserDate {
-    constructor(day, month, year, shift){
-        this.day = day
-        this.month = month
-        this.year = year
+    constructor(date, shift){
+        this.date = date
         this.shift = shift
     }
     showDate(elem) {
-        elem.innerHTML = this.day + '.' + this.month + '.' + this.year + ' - ' + this.shift
+        let shownDay = document.createElement('div') 
+        shownDay.innerHTML = `<p>${this.date.toLocaleString("uk", options)}</p><p>${this.shift}</p>`
+        elem.append(shownDay)
     }
 }
 
 function calculateDate(container, data1, data2) {
-        
+       
     let date = data1.valueAsDate
     let day = data2.valueAsDate  
     let dayType = ''
@@ -44,11 +53,27 @@ function calculateDate(container, data1, data2) {
     } else if (x) {    
         dayType = compare(x)        
     } 
-    let d = addZero(+day.getDate())
-    let m = addZero(+day.getMonth() + 1)
-    let year = +day.getFullYear()
-    let userDate = new UserDate(d, m, year, dayType)
-    userDate.showDate(outputWindow)       
+    let userDate = new UserDate(day, dayType)
+    userDate.showDate(container)
+
+}
+
+function createBefore (date) {
+    for (let i=3; i>0; i--) {
+        let secs = +date.valueAsDate - i*86400*1000
+        let day = new Date(secs)
+        let otherDate = new UserDate(day, null)
+        console.log(otherDate)
+    }
+}
+
+function createAfter (date) {
+    for (let i=1; i<=3; i++) {
+        let secs = +date.valueAsDate + i*86400*1000
+        let day = new Date(secs)
+        let otherDate = new UserDate(day, null)
+        console.log(otherDate)
+    }
 }
 
 function compare(num) { 
