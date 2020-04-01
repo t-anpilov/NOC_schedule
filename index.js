@@ -11,14 +11,13 @@ const options = {
     day: 'numeric',
 }
 
-
 closeBtn.addEventListener('click', closeInput)
 
 btn.addEventListener('click', ()=>{
     cleanBox(outputWindow)
-    createBefore(lastDate, outputWindow)
+    createBefore(outputWindow, firstDate, lastDate)
     calculateDate(outputWindow, firstDate, lastDate)    
-    createAfter(lastDate, outputWindow)
+    createAfter(outputWindow, firstDate, lastDate)
 })
 
 function closeInput() {
@@ -65,21 +64,51 @@ function calculateDate(container, data1, data2) {
     userDate.showDate(container)    
 }
 
-function createBefore (date, container) {
+function createBefore (container, data1, data2) {
+
+    let date = data1.valueAsDate
     for (let i=3; i>0; i--) {
-        let secs = +date.valueAsDate - i*86400*1000
+        let secs = +data2.valueAsDate - i*86400*1000
         let day = new Date(secs)
-        let otherDate = new UserDate(day, null)
-        otherDate.showDate(container)
+        let dayType = ''
+        let x, y
+        if (day>=date){
+            x = (day-date)/86400000
+        } else {
+            alert('look forward!')
+        }
+        if (x>14) {
+            y = x%15
+            dayType = compare(y)
+        } else if (x) {    
+            dayType = compare(x)        
+        } 
+        let userDate = new UserDate(day, dayType)
+        userDate.showDate(container)
     }
 }
 
-function createAfter (date, container) {
+function createAfter (container, data1, data2) {
+
+    let date = data1.valueAsDate
     for (let i=1; i<=3; i++) {
-        let secs = +date.valueAsDate + i*86400*1000
+        let secs = +data2.valueAsDate + i*86400*1000
         let day = new Date(secs)
-        let otherDate = new UserDate(day, null)
-        otherDate.showDate(container)
+        let dayType = ''
+        let x, y
+        if (day>=date){
+            x = (day-date)/86400000
+        } else {
+            alert('look forward!')
+        }
+        if (x>14) {
+            y = x%15
+            dayType = compare(y)
+        } else if (x) {    
+            dayType = compare(x)        
+        } 
+        let userDate = new UserDate(day, dayType)
+        userDate.showDate(container)
     }
 }
 
