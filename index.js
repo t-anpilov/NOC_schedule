@@ -94,26 +94,19 @@ function getShift(date, day) {
     day = +day
     let dayType
     let x, y
-        if (day>=date){
-            x = (day-date)/86400000
-        } else {
-            alert('look forward!')
-        }
-        if (x>14) {
-            y = x%15
-            dayType = compare(y)
-        } else if (x) {    
-            dayType = compare(x)        
-        }
+    if (day>=date){
+        x = (day-date)/86400000
+    } else {
+        alert('look forward!')
+    }
+    if (x>14) {
+        y = x%15
+        dayType = compare(y)
+    } else if (x) {    
+        dayType = compare(x)        
+    }
     return dayType    
 }
-
-/*function addZero(num) {
-    if (num<10 && num>0){
-        num = '0' + num
-    }
-    return num
-}*/
 
 function cleanBox(box) {
     while(box.lastChild){
