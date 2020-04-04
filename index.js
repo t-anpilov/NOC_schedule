@@ -47,19 +47,7 @@ function calculateDate(container, data1, data2) {
        
     let date = data1.valueAsDate
     let day = data2.valueAsDate  
-    let dayType = ''
-    let x, y
-    if (day>=date){
-        x = (day-date)/86400000
-    } else {
-        alert('look forward!')
-    }
-    if (x>14) {
-        y = x%15
-        dayType = compare(y)
-    } else if (x) {    
-        dayType = compare(x)        
-    } 
+    let dayType = getShift(date, day)
     let userDate = new centerUserDate(day, dayType)
     userDate.showDate(container)    
 }
@@ -70,19 +58,7 @@ function createBefore (container, data1, data2) {
     for (let i=3; i>0; i--) {
         let secs = +data2.valueAsDate - i*86400*1000
         let day = new Date(secs)
-        let dayType = ''
-        let x, y
-        if (day>=date){
-            x = (day-date)/86400000
-        } else {
-            alert('look forward!')
-        }
-        if (x>14) {
-            y = x%15
-            dayType = compare(y)
-        } else if (x) {    
-            dayType = compare(x)        
-        } 
+        let dayType = getShift(date, day) 
         let userDate = new UserDate(day, dayType)
         userDate.showDate(container)
     }
@@ -94,19 +70,7 @@ function createAfter (container, data1, data2) {
     for (let i=1; i<=3; i++) {
         let secs = +data2.valueAsDate + i*86400*1000
         let day = new Date(secs)
-        let dayType = ''
-        let x, y
-        if (day>=date){
-            x = (day-date)/86400000
-        } else {
-            alert('look forward!')
-        }
-        if (x>14) {
-            y = x%15
-            dayType = compare(y)
-        } else if (x) {    
-            dayType = compare(x)        
-        } 
+        let dayType = getShift(date, day)        
         let userDate = new UserDate(day, dayType)
         userDate.showDate(container)
     }
@@ -123,6 +87,25 @@ function compare(num) {
     } else if (num==2 || num===1 || num===0) {
         result = 'first shift' 
     } return result
+}
+
+function getShift(date, day) {
+    date = +date
+    day = +day
+    let dayType
+    let x, y
+        if (day>=date){
+            x = (day-date)/86400000
+        } else {
+            alert('look forward!')
+        }
+        if (x>14) {
+            y = x%15
+            dayType = compare(y)
+        } else if (x) {    
+            dayType = compare(x)        
+        }
+    return dayType    
 }
 
 /*function addZero(num) {
