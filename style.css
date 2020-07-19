@@ -11,23 +11,37 @@ body {
 }
 .data-in {
     margin: 20px auto 0;
-    width: 40%;
+    width: 85%;
     background-color: rgb(233, 228, 224);
 }
 .data-in div {
     padding: 12px;
+    text-align: center;
 }
 .data-in p {
     padding-bottom: 6px;
 }
 .data-out {
-    margin: 10px 10px 0; 
+    margin: 10px auto 0;
+    width: 85%; 
     display: flex;
     justify-content: space-between;    
 }
 .data-out div {    
     padding: 12px;
-    background-color: floralwhite;
+    margin: 5px;
+}
+.first_shift {
+    background-color: rgb(164, 174, 204);
+}
+.second_shift {
+    background-color: rgb(165, 209, 173);
+}
+.night_shift {
+    background-color: rgb(184, 158, 158);
+}
+.day_off {
+    border: 1px solid rgb(102, 112, 122);
 }
 .data-out p {  
     text-align: center;  
