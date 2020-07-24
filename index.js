@@ -1,8 +1,11 @@
 const outputWindow = document.getElementById('date_out')
-const firstDate = document.getElementById('first_date')
+const team = document.getElementById('team')
 const lastDate = document.getElementById('last_date')
 const closeBtn = document.getElementById('close')
 const btn = document.getElementById('do')
+
+const shownDaysCount = 3
+
 
 const options = {
     weekday: 'long',
@@ -28,18 +31,12 @@ const dayOff = {
     style: 'day_off'
 }
 
-closeBtn.addEventListener('click', closeInput)
-
 btn.addEventListener('click', ()=>{
     cleanBox(outputWindow)
-    createBefore(outputWindow, firstDate, lastDate)
-    calculateDate(outputWindow, firstDate, lastDate)    
-    createAfter(outputWindow, firstDate, lastDate)
+    createBefore(outputWindow, lastDate)
+    calculateDate(outputWindow,lastDate)    
+    createAfter(outputWindow, lastDate)
 })
-
-function closeInput() {
-    firstDate.disabled = true  
-}
 
 class UserDate {
     constructor(date, shift){
@@ -61,19 +58,35 @@ class centerUserDate extends UserDate {
     }
 }
 
-function calculateDate(container, data1, data2) {
+function getFirstDate() {
+    let firstDate
+    if (team.value==1) {
+        firstDate = new Date(2020, 6, 8)
+    } else if (team.value==2) {
+        firstDate = new Date(2020, 6, 11)
+    } else if (team.value==3) {
+        firstDate = new Date(2020, 6, 14)
+    } else if (team.value==4) {
+        firstDate = new Date(2020, 6, 17)
+    }else if (team.value==5) {
+        firstDate = new Date(2020, 6, 20)
+    }
+    return firstDate
+}
+
+function calculateDate(container,data2) {
        
-    let date = data1.valueAsDate
+    let date = getFirstDate()
     let day = data2.valueAsDate  
     let dayType = getShift(date, day)
     let userDate = new centerUserDate(day, dayType)
     userDate.showDate(container)    
 }
 
-function createBefore (container, data1, data2) {
+function createBefore (container, data2) {
 
-    let date = data1.valueAsDate
-    for (let i=3; i>0; i--) {
+    let date = getFirstDate()
+    for (let i=shownDaysCount; i>0; i--) {
         let secs = +data2.valueAsDate - i*86400*1000
         let day = new Date(secs)
         let dayType = getShift(date, day) 
@@ -82,10 +95,10 @@ function createBefore (container, data1, data2) {
     }
 }
 
-function createAfter (container, data1, data2) {
+function createAfter (container, data2) {
 
-    let date = data1.valueAsDate
-    for (let i=1; i<=3; i++) {
+    let date = getFirstDate()
+    for (let i=1; i<=shownDaysCount; i++) {
         let secs = +data2.valueAsDate + i*86400*1000
         let day = new Date(secs)
         let dayType = getShift(date, day)        
@@ -108,6 +121,7 @@ function compare(num) {
     } return result
 }
 
+
 function compareBack(num) { 
     let result
     if (num==1 || num==2 || num==3 || num==7 || num==8 || num==9) {
@@ -116,18 +130,18 @@ function compareBack(num) {
         result = nightShift
     } else  if (num==10 || num==11 || num==12) {
         result = secondShift
-    } else if (num==13 || num===14 || num===0) {
+    } else if (num==13 || num==14 || num===0 || num==15) {
         result = firstShift 
     } return result
 }
 
 function getShift(date, day) {
-    date = +date
-    day = +day
+    date = Math.round(+date/86400000)
+    day = Math.round(+day/86400000)
     let someShift    
     let x, y
     if (day>=date){
-        x = (day-date)/86400000
+        x = day-date
         if (x>14) {
             y = x%15
             someShift = compare(y)
@@ -137,11 +151,15 @@ function getShift(date, day) {
             someShift = firstShift              
         }
     } else if (day<date){
-        x = (date-day)/86400000
+        x = date-day
         if (x>15) {
             y = x%15
             someShift = compareBack(y)
-        } else if (x) {    
+            
+        } else if (x==15) {                
+            someShift = compareBack(x)        
+        }   
+        else if (x) {    
             someShift = compareBack(x)        
         }        
     }    
