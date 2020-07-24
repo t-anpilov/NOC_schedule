@@ -4,7 +4,7 @@ const lastDate = document.getElementById('last_date')
 const closeBtn = document.getElementById('close')
 const btn = document.getElementById('do')
 
-const shownDaysCount = 3
+const shownDaysCount = 4
 
 
 const options = {
@@ -30,6 +30,15 @@ const dayOff = {
     text: 'day off',
     style: 'day_off'
 }
+
+const shiftDate = {
+    team1: '2020, 6, 8',
+    team2: '2020, 6, 11',
+    team3: '2020, 6, 14',
+    team4: '2020, 6, 17',
+    team5: '2020, 6, 20',
+}
+
 
 btn.addEventListener('click', ()=>{
     cleanBox(outputWindow)
@@ -61,15 +70,15 @@ class centerUserDate extends UserDate {
 function getFirstDate() {
     let firstDate
     if (team.value==1) {
-        firstDate = new Date(2020, 6, 8)
+        firstDate = new Date(shiftDate.team1)
     } else if (team.value==2) {
-        firstDate = new Date(2020, 6, 11)
+        firstDate = new Date(shiftDate.team2)
     } else if (team.value==3) {
-        firstDate = new Date(2020, 6, 14)
+        firstDate = new Date(shiftDate.team3)
     } else if (team.value==4) {
-        firstDate = new Date(2020, 6, 17)
+        firstDate = new Date(shiftDate.team4)
     }else if (team.value==5) {
-        firstDate = new Date(2020, 6, 20)
+        firstDate = new Date(shiftDate.team5)
     }
     return firstDate
 }
@@ -120,7 +129,6 @@ function compare(num) {
         result = firstShift 
     } return result
 }
-
 
 function compareBack(num) { 
     let result
