@@ -39,6 +39,9 @@ const shiftDate = {
     team5: '2020, 6, 20',
 }
 
+lastDate.addEventListener('change', ()=>{
+    btn.disabled = false
+})
 
 btn.addEventListener('click', ()=>{
     cleanBox(outputWindow)

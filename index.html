@@ -8,6 +8,7 @@
     <title>My schedule</title>
 </head>
 <body>
+    <div class="wrapper">
     <h1>Shift calculation</h1>
     <section class='data-in'>
         <div>
@@ -23,11 +24,12 @@
         <div>
             <p>Choose the required date:</p>
             <input id='last_date' type="date">
-            <button id='do'>Enter</button>
+            <button id='do' disabled="true">Enter</button>
         </div>                
     </section>    
     <section class='data-out' id='date_out'>
-    </section>  
+    </section>
+    </div>  
 </body>
 <script src="index.js"></script>
 </html>
